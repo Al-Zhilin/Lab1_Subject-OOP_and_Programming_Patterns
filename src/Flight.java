@@ -8,7 +8,7 @@ public class Flight {
     /** Сколько рейсов создано. Общее для ВСЕХ объектов класса. */
     private static int flightsCount = 0;
 
-    // ---------- Поля объекта: все private (задание 1) ----------
+    // ---------- Поля объекта: все private ----------
 
     private final String number;     // final: задаётся один раз
     private final Route route;       // Route неизменяем, поэтому final + геттер безопасны
@@ -17,7 +17,6 @@ public class Flight {
 
     // ---------- Конструкторы ----------
 
-    /** Полный конструктор: здесь проверяются ВСЕ правила. */
     public Flight(String number, Route route, int totalSeats, int soldSeats) {
         if (number == null || number.isBlank()) {
             throw new IllegalArgumentException("Номер рейса не может быть пустым");
@@ -104,18 +103,13 @@ public class Flight {
         soldSeats += count;
     }
 
-    // ---------- Статический геттер счётчика ----------
-
     /** Статический метод вызывается через класс: Flight.getFlightsCount(). */
     public static int getFlightsCount() {
         return flightsCount;
     }
 
-    // ---------- toString ----------
-
     @Override
     public String toString() {
-        // %s - строка, %d - целое, %.1f - дробное с 1 знаком, %% - символ процента
         return String.format("Рейс %s [%s]: продано %d из %d (%.1f%%)",
                 number, route, soldSeats, totalSeats, getLoadPercent());
     }

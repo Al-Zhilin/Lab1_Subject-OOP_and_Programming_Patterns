@@ -50,9 +50,9 @@ public class Main {
         System.out.println("[1] Продать 1000 билетов на " + f1.getNumber());
         try {
             f1.sellTicket(1000);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException | IllegalStateException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Состояние: " + f1);
 
@@ -61,9 +61,9 @@ public class Main {
         int before = Flight.getFlightsCount();
         try {
             Flight bad = new Flight("SU-9999", new Route("Краснодар", "Краснодар"), 100);
-            System.out.println("  ОШИБКА: нарушение не Пропущено! " + bad);
+            System.out.println("  ОШИБКА: нарушение не обработалось! " + bad);
         } catch (IllegalArgumentException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Счётчик рейсов не изменился: " + before + " -> "
                 + Flight.getFlightsCount() + "; в расписании рейсов: " + schedule.getCount());
@@ -72,9 +72,9 @@ public class Main {
         System.out.println("[3] Продать -3 билета на " + f1.getNumber());
         try {
             f1.sellTicket(-3);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException | IllegalStateException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Состояние: " + f1);
 
@@ -82,18 +82,18 @@ public class Main {
         System.out.println("[4] Создать рейс, где продано больше, чем всего мест (300 из 100)");
         try {
             new Flight("SU-8888", new Route("Сочи", "Москва"), 100, 300);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Счётчик рейсов: " + Flight.getFlightsCount());
 
         System.out.println("[5] Создать рейс с пустым номером");
         try {
             new Flight("   ", new Route("Сочи", "Москва"), 100);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Счётчик рейсов: " + Flight.getFlightsCount());
 
@@ -101,9 +101,9 @@ public class Main {
                 + Flight.MAX_SEATS + ")");
         try {
             new Flight("SU-7777", new Route("Сочи", "Москва"), Flight.MAX_SEATS + 1);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Счётчик рейсов: " + Flight.getFlightsCount());
 
@@ -111,9 +111,9 @@ public class Main {
         System.out.println("[7] Продать 500 билетов через расписание на SU-1002");
         try {
             schedule.sellTickets("SU-1002", 500);
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException | IllegalStateException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Состояние: " + f2);
 
@@ -135,9 +135,9 @@ public class Main {
         System.out.println("Попытка сделать маршрут с пустым пунктом назначения:");
         try {
             r.withDestination("  ");
-            System.out.println("  ОШИБКА: нарушение не Пропущено!");
+            System.out.println("  ОШИБКА: нарушение не обработалось!");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Пропущено: " + e.getMessage());
+            System.out.println("  Обработано исключение: " + e.getMessage());
         }
         System.out.println("  Маршрут рейса по-прежнему: " + f1.getRoute());
 
