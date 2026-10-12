@@ -1,4 +1,4 @@
-/** Обмен бесплатный. */
+// Обмен бесплатный
 public class FreeExchange implements ExchangeRule {
 
     @Override

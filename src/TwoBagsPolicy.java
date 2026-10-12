@@ -1,4 +1,4 @@
-/** Два места багажа по 23 кг (всего 46 кг) включены, перевес оплачивается. */
+// Два места багажа по 23 кг (всего 46 кг) включены, перевес оплачивается
 public class TwoBagsPolicy implements BaggagePolicy {
 
     private static final double FREE_KG = 46;

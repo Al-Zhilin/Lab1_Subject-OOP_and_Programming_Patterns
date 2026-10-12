@@ -1,4 +1,4 @@
-/** Обмен за фиксированную плату. */
+// Обмен платный
 public class PaidExchange implements ExchangeRule {
 
     private final double fee;

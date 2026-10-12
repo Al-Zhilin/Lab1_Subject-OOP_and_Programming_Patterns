@@ -28,20 +28,20 @@ public abstract class Fare {
 
     // ---------- Различия: обязаны реализовать наследники ----------
 
-    /** Во сколько раз тариф дороже базовой цены. */
+    // Во сколько раз тариф дороже базовой цены
     protected abstract double getPriceMultiplier();
 
-    /** Какой процент стоимости возвращается, если отказ за daysBefore дней до вылета. */
+    // Какой процент стоимости возвращается, если отказ за daysBefore дней до вылета
     protected abstract double refundPercent(int daysBefore);
 
-    /** Сколько стоит обмен билета за daysBefore дней до вылета. */
+    // Сколько стоит обмен билета за daysBefore дней до вылета
     protected abstract double exchangeFee(int daysBefore);
 
     // ---------- Общий алгоритм: final, наследники его менять не могут ----------
 
     /**
-     * Итоговая цена = цена тарифа + доплата за багаж по правилу рейса.
-     * final: расчёт цены один для всех тарифов, иначе итог зависел бы от прихоти наследника.
+     Итоговая цена = цена тарифа + доплата за багаж по правилу рейса.
+     final: расчёт цены один для всех тарифов, иначе итог зависел бы от прихоти наследника.
      */
     public final double calculatePrice(Flight flight, double baggageKg) {
         if (flight == null) {
@@ -50,13 +50,13 @@ public abstract class Fare {
         return basePrice * getPriceMultiplier() + flight.getBaggageSurcharge(baggageKg);
     }
 
-    /** Сколько денег вернут клиенту. final: проверка данных одна для всех. */
+    // Сколько денег вернут клиенту. final: проверка данных одна для всех
     public final double refundAmount(double paid, int daysBefore) {
         checkPaidAndDays(paid, daysBefore);
         return paid * refundPercent(daysBefore) / 100;
     }
 
-    /** Стоимость обмена. final по той же причине. */
+    // Стоимость обмена. final по той же причине
     public final double exchangeCost(double paid, int daysBefore) {
         checkPaidAndDays(paid, daysBefore);
         return exchangeFee(daysBefore);

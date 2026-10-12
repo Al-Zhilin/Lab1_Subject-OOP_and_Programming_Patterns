@@ -1,4 +1,4 @@
-/** Одно место багажа до 23 кг включено, перевес оплачивается. */
+// Включено одно место багажа (до 23 кг), свыше оплачивается
 public class OneBagPolicy implements BaggagePolicy {
 
     private static final double FREE_KG = 23;

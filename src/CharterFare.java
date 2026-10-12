@@ -1,4 +1,4 @@
-/** Чартер: самый дешёвый, возврата нет, обмен слишком дорогой. */
+// Чартерный тип: самый дешёвый, возврата нет, обмен слишком дорогой
 public class CharterFare extends Fare {
 
     public CharterFare(double basePrice) {

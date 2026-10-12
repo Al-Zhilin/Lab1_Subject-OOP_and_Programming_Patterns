@@ -1,4 +1,4 @@
-/** Обмена нет: он стоит как новый билет. */
+// Обмена билета нет. Стоимости: как у нового билета
 public class NoExchange implements ExchangeRule {
 
     @Override

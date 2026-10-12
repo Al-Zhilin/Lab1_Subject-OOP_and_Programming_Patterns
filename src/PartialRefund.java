@@ -1,4 +1,4 @@
-/** Частичный возврат: процент зависит от того, далеко ли вылет. */
+// Частичный возврат. Процент зависит от того, сколько осталось до вылета
 public class PartialRefund implements RefundRule {
 
     private final int thresholdDays;

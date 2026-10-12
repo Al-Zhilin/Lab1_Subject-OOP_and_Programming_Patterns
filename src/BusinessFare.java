@@ -1,4 +1,4 @@
-/** Бизнес: дорого, возврат почти полный, обмен бесплатный. */
+// Бизнес тариф: дорогой, возврат почти полный, обмен - бесплатный
 public class BusinessFare extends Fare {
 
     public BusinessFare(double basePrice) {

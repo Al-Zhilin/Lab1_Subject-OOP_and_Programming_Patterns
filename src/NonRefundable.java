@@ -1,4 +1,4 @@
-/** Возврата нет. */
+// Невозврат
 public class NonRefundable implements RefundRule {
 
     @Override

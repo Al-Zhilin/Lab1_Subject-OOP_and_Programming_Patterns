@@ -1,4 +1,4 @@
-/** Эконом: дёшево, возврат с удержанием, обмен платный. */
+// Эконом: дёшево, возврат с удержанием, обмен платный
 public class EconomyFare extends Fare {
 
     public EconomyFare(double basePrice) {
