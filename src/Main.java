@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -150,5 +153,65 @@ public class Main {
         copy[0] = null;                                // портим КОПИЮ
         System.out.println("Подменили copy[0] на null. Рейсов в расписании: " + schedule.getCount()
                 + ", SU-1001 по-прежнему находится: " + (schedule.findByNumber("SU-1001") != null));
+
+        // ================= ЛР2. Места, тарифы, багаж =================
+        System.out.println();
+        System.out.println("=== ЛР2. Сборка объектов (единственное место, где названы конкретные классы) ===");
+
+        Flight sochi = new Flight("SU-5005", new Route("Краснодар", "Сочи"), 100, 0, new OneBagPolicy());
+        Flight kazan = new Flight("S7-6006", new Route("Москва", "Казань"), 100, 0, new TwoBagsPolicy());
+        Flight noBag = new Flight("DP-7007", new Route("Сочи", "Москва"), 100, 0, new NoBaggagePolicy());
+        Flight[] flights = {sochi, kazan, noBag};
+
+        List<Fare> fares = new ArrayList<>();
+        fares.add(new EconomyFare(5000));
+        fares.add(new BusinessFare(5000));
+        fares.add(new CharterFare(5000));
+        fares.add(new ComposedFare("Бизнес-гибкий", 5000, new ServiceClass("Бизнес", 2.5),
+                new FullRefund(), new FreeExchange()));
+
+        System.out.println("--- Цена с багажом 30 кг на разных рейсах ---");
+        for (Flight f : flights) {
+            printPrices(f, fares, 30);
+        }
+
+        System.out.println("--- Возврат и обмен: билет оплачен по цене тарифа, отказ за 5 дней и за 0 дней ---");
+        printRefunds(fares, sochi);
+
+        System.out.println("--- Защита данных ---");
+        try {
+            new EconomyFare(-100);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Тариф с отрицательной ценой: " + e.getMessage());
+        }
+        try {
+            fares.get(0).refundAmount(1000, -1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Возврат за -1 день: " + e.getMessage());
+        }
+        try {
+            sochi.getBaggageSurcharge(-5);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Отрицательный вес багажа: " + e.getMessage());
+        }
+        sochi.sellTicket(3);
+        System.out.println("Места создаются вместе с рейсом, продано по местам: " + sochi);
+    }
+
+    /** Клиентский код: знает только Fare и Flight, какой именно тариф и правило багажа - не знает. */
+    private static void printPrices(Flight flight, List<Fare> fares, double baggageKg) {
+        System.out.println("Рейс " + flight.getNumber() + ":");
+        for (Fare fare : fares) {
+            System.out.printf("  %-14s %.2f руб.%n", fare.getName(), fare.calculatePrice(flight, baggageKg));
+        }
+    }
+
+    private static void printRefunds(List<Fare> fares, Flight flight) {
+        for (Fare fare : fares) {
+            double paid = fare.calculatePrice(flight, 0);
+            System.out.printf("  %-14s оплачено %.2f; возврат за 5 дн.: %.2f, за 0 дн.: %.2f; обмен: %.2f%n",
+                    fare.getName(), paid, fare.refundAmount(paid, 5), fare.refundAmount(paid, 0),
+                    fare.exchangeCost(paid, 5));
+        }
     }
 }
